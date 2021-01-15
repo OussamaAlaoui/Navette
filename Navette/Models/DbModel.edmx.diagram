@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6ae21c3f5dca435a84068633751ea234" Name="Diagram1">
+        <EntityTypeShape EntityType="NavetteModel.bank_cards" Width="1.5" PointX="7.5" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NavetteModel.line" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NavetteModel.payment_methods" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="NavetteModel.paypal_accounts" Width="1.5" PointX="7.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NavetteModel.provider" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NavetteModel.request" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NavetteModel.subscription" Width="1.5" PointX="9.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NavetteModel.traveller" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NavetteModel.user" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NavetteModel.vehicule" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="NavetteModel.fk_pay_meth1" ManuallyRouted="false" />
+        <AssociationConnector Association="NavetteModel.fk_lines" ManuallyRouted="false" />
+        <AssociationConnector Association="NavetteModel.fk_provider" ManuallyRouted="false" />
+        <AssociationConnector Association="NavetteModel.fk_vehicule" ManuallyRouted="false" />
+        <AssociationConnector Association="NavetteModel.fk_pay_meth" ManuallyRouted="false" />
+        <AssociationConnector Association="NavetteModel.fk_traveller" ManuallyRouted="false" />
+        <AssociationConnector Association="NavetteModel.fk_providers" ManuallyRouted="false" />
+        <AssociationConnector Association="NavetteModel.fk_users1" ManuallyRouted="false" />
+        <AssociationConnector Association="NavetteModel.fk_traveller2" ManuallyRouted="false" />
+        <AssociationConnector Association="NavetteModel.fk_traveller1" ManuallyRouted="false" />
+        <AssociationConnector Association="NavetteModel.fk_users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

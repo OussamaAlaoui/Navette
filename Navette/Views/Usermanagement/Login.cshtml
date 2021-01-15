@@ -1,0 +1,48 @@
+﻿@model Navette.Models.user
+@{
+    ViewBag.Title = "Login";
+
+}
+
+
+<header>
+    <link href="~/Content/Style/Login.css" rel="stylesheet" />
+</header>
+
+<body>
+
+    <section class="join-main-section">
+
+        @using (Html.BeginForm())
+        {
+            <h2 class="page-title">Login</h2>
+            <div class="input-group">
+                <label>Email / Connection String</label>
+                @Html.TextBoxFor(s => s.connectionstring, new { @Class = "form-control" })
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                @Html.PasswordFor(s => s.password, new { @Class = "form-control" })
+            </div>
+
+            @ViewBag.m;
+            <div class="input-group">
+
+
+                <button type="submit" class="btn" name="Login">Login</button>
+
+            </div>
+        }
+
+
+
+
+
+        <a class="forgot-password" href="">Forgotten password?</a>
+
+        <div class="">
+
+            <a class="create-account" href=@Url.Action("Create","Usermanagement")>Create an account </a>
+        </div>
+    </section>
+</body>

@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NavetteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="bank_cards">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="owner_id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="owner_id" Type="Int32" Nullable="false" />
+    <Property Name="account_number" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="last_digits" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="account_owner" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="expiration_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="payment_methods" Relationship="Self.fk_pay_meth1" FromRole="bank_cards" ToRole="payment_methods" />
+  </EntityType>
+  <EntityType Name="line">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="departure_time" Type="Time" Precision="6" />
+    <Property Name="estimated_arrival_time" Type="Time" Precision="6" />
+    <Property Name="departure_location" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="arrival_location" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="day" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="weekly" Type="Boolean" />
+    <Property Name="vehicule" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="owner_company" Type="Int32" />
+    <NavigationProperty Name="subscriptions" Relationship="Self.fk_lines" FromRole="lines" ToRole="subscriptions" />
+    <NavigationProperty Name="provider" Relationship="Self.fk_provider" FromRole="lines" ToRole="providers" />
+    <NavigationProperty Name="vehicule1" Relationship="Self.fk_vehicule" FromRole="lines" ToRole="vehicules" />
+  </EntityType>
+  <EntityType Name="payment_methods">
+    <Key>
+      <PropertyRef Name="traveller_id" />
+      <PropertyRef Name="payment_method_id" />
+    </Key>
+    <Property Name="traveller_id" Type="Int32" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="payment_method_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="bank_cards" Relationship="Self.fk_pay_meth1" FromRole="payment_methods" ToRole="bank_cards" />
+    <NavigationProperty Name="paypal_accounts" Relationship="Self.fk_pay_meth" FromRole="payment_methods" ToRole="paypal_accounts" />
+    <NavigationProperty Name="traveller" Relationship="Self.fk_traveller" FromRole="payment_methods" ToRole="travellers" />
+  </EntityType>
+  <EntityType Name="paypal_accounts">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="owner_id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="owner_id" Type="Int32" Nullable="false" />
+    <Property Name="account_number" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="payment_methods" Relationship="Self.fk_pay_meth" FromRole="paypal_accounts" ToRole="payment_methods" />
+  </EntityType>
+  <EntityType Name="provider">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="location" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="legal_number" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="phone_number" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="lines" Relationship="Self.fk_provider" FromRole="providers" ToRole="lines" />
+    <NavigationProperty Name="vehicules" Relationship="Self.fk_providers" FromRole="providers" ToRole="vehicules" />
+    <NavigationProperty Name="user" Relationship="Self.fk_users1" FromRole="providers" ToRole="users" />
+  </EntityType>
+  <EntityType Name="request">
+    <Key>
+      <PropertyRef Name="request_id" />
+    </Key>
+    <Property Name="request_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="departure_time" Type="Time" Precision="6" Nullable="false" />
+    <Property Name="estimated_arrival_time" Type="Time" Precision="6" Nullable="false" />
+    <Property Name="departure_location" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="arrival_location" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="day" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="weekly" Type="Boolean" Nullable="false" />
+    <Property Name="owner_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="traveller" Relationship="Self.fk_traveller2" FromRole="requests" ToRole="travellers" />
+  </EntityType>
+  <EntityType Name="subscription">
+    <Key>
+      <PropertyRef Name="traveller_id" />
+      <PropertyRef Name="line_id" />
+    </Key>
+    <Property Name="traveller_id" Type="Int32" Nullable="false" />
+    <Property Name="line_id" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="reduction" Type="Decimal" Precision="2" Scale="0" />
+    <NavigationProperty Name="line" Relationship="Self.fk_lines" FromRole="subscriptions" ToRole="lines" />
+    <NavigationProperty Name="traveller" Relationship="Self.fk_traveller1" FromRole="subscriptions" ToRole="travellers" />
+  </EntityType>
+  <EntityType Name="traveller">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="national_id_number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="topup" Type="Decimal" Precision="2" Scale="0" />
+    <NavigationProperty Name="payment_methods" Relationship="Self.fk_traveller" FromRole="travellers" ToRole="payment_methods" />
+    <NavigationProperty Name="requests" Relationship="Self.fk_traveller2" FromRole="travellers" ToRole="requests" />
+    <NavigationProperty Name="subscriptions" Relationship="Self.fk_traveller1" FromRole="travellers" ToRole="subscriptions" />
+    <NavigationProperty Name="user" Relationship="Self.fk_users" FromRole="travellers" ToRole="users" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="connectionstring" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="type" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="approved" Type="Boolean" />
+    <Property Name="name" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="provider" Relationship="Self.fk_users1" FromRole="users" ToRole="providers" />
+    <NavigationProperty Name="traveller" Relationship="Self.fk_users" FromRole="users" ToRole="travellers" />
+  </EntityType>
+  <EntityType Name="vehicule">
+    <Key>
+      <PropertyRef Name="registration_number" />
+    </Key>
+    <Property Name="brand" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+    <Property Name="registration_number" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="seats" Type="Int32" />
+    <Property Name="provider_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="lines" Relationship="Self.fk_vehicule" FromRole="vehicules" ToRole="lines" />
+    <NavigationProperty Name="provider" Relationship="Self.fk_providers" FromRole="vehicules" ToRole="providers" />
+  </EntityType>
+  <Association Name="fk_pay_meth1">
+    <End Role="payment_methods" Type="Self.payment_methods" Multiplicity="1" />
+    <End Role="bank_cards" Type="Self.bank_cards" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="payment_methods">
+        <PropertyRef Name="payment_method_id" />
+        <PropertyRef Name="traveller_id" />
+      </Principal>
+      <Dependent Role="bank_cards">
+        <PropertyRef Name="id" />
+        <PropertyRef Name="owner_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_lines">
+    <End Role="lines" Type="Self.line" Multiplicity="1" />
+    <End Role="subscriptions" Type="Self.subscription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lines">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="subscriptions">
+        <PropertyRef Name="line_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_provider">
+    <End Role="providers" Type="Self.provider" Multiplicity="0..1" />
+    <End Role="lines" Type="Self.line" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="providers">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="lines">
+        <PropertyRef Name="owner_company" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_vehicule">
+    <End Role="vehicules" Type="Self.vehicule" Multiplicity="0..1" />
+    <End Role="lines" Type="Self.line" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vehicules">
+        <PropertyRef Name="registration_number" />
+      </Principal>
+      <Dependent Role="lines">
+        <PropertyRef Name="vehicule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_pay_meth">
+    <End Role="payment_methods" Type="Self.payment_methods" Multiplicity="1" />
+    <End Role="paypal_accounts" Type="Self.paypal_accounts" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="payment_methods">
+        <PropertyRef Name="payment_method_id" />
+        <PropertyRef Name="traveller_id" />
+      </Principal>
+      <Dependent Role="paypal_accounts">
+        <PropertyRef Name="id" />
+        <PropertyRef Name="owner_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_traveller">
+    <End Role="travellers" Type="Self.traveller" Multiplicity="1" />
+    <End Role="payment_methods" Type="Self.payment_methods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="travellers">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="payment_methods">
+        <PropertyRef Name="traveller_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_providers">
+    <End Role="providers" Type="Self.provider" Multiplicity="1" />
+    <End Role="vehicules" Type="Self.vehicule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="providers">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="vehicules">
+        <PropertyRef Name="provider_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_users1">
+    <End Role="users" Type="Self.user" Multiplicity="1" />
+    <End Role="providers" Type="Self.provider" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="providers">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_traveller2">
+    <End Role="travellers" Type="Self.traveller" Multiplicity="1" />
+    <End Role="requests" Type="Self.request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="travellers">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="requests">
+        <PropertyRef Name="owner_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_traveller1">
+    <End Role="travellers" Type="Self.traveller" Multiplicity="1" />
+    <End Role="subscriptions" Type="Self.subscription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="travellers">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="subscriptions">
+        <PropertyRef Name="traveller_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_users">
+    <End Role="users" Type="Self.user" Multiplicity="1" />
+    <End Role="travellers" Type="Self.traveller" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="travellers">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NavetteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="bank_cards" EntityType="Self.bank_cards" />
+    <EntitySet Name="lines" EntityType="Self.line" />
+    <EntitySet Name="payment_methods" EntityType="Self.payment_methods" />
+    <EntitySet Name="paypal_accounts" EntityType="Self.paypal_accounts" />
+    <EntitySet Name="providers" EntityType="Self.provider" />
+    <EntitySet Name="requests" EntityType="Self.request" />
+    <EntitySet Name="subscriptions" EntityType="Self.subscription" />
+    <EntitySet Name="travellers" EntityType="Self.traveller" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <EntitySet Name="vehicules" EntityType="Self.vehicule" />
+    <AssociationSet Name="fk_pay_meth1" Association="Self.fk_pay_meth1">
+      <End Role="payment_methods" EntitySet="payment_methods" />
+      <End Role="bank_cards" EntitySet="bank_cards" />
+    </AssociationSet>
+    <AssociationSet Name="fk_lines" Association="Self.fk_lines">
+      <End Role="lines" EntitySet="lines" />
+      <End Role="subscriptions" EntitySet="subscriptions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_provider" Association="Self.fk_provider">
+      <End Role="providers" EntitySet="providers" />
+      <End Role="lines" EntitySet="lines" />
+    </AssociationSet>
+    <AssociationSet Name="fk_vehicule" Association="Self.fk_vehicule">
+      <End Role="vehicules" EntitySet="vehicules" />
+      <End Role="lines" EntitySet="lines" />
+    </AssociationSet>
+    <AssociationSet Name="fk_pay_meth" Association="Self.fk_pay_meth">
+      <End Role="payment_methods" EntitySet="payment_methods" />
+      <End Role="paypal_accounts" EntitySet="paypal_accounts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_traveller" Association="Self.fk_traveller">
+      <End Role="travellers" EntitySet="travellers" />
+      <End Role="payment_methods" EntitySet="payment_methods" />
+    </AssociationSet>
+    <AssociationSet Name="fk_providers" Association="Self.fk_providers">
+      <End Role="providers" EntitySet="providers" />
+      <End Role="vehicules" EntitySet="vehicules" />
+    </AssociationSet>
+    <AssociationSet Name="fk_users1" Association="Self.fk_users1">
+      <End Role="users" EntitySet="users" />
+      <End Role="providers" EntitySet="providers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_traveller2" Association="Self.fk_traveller2">
+      <End Role="travellers" EntitySet="travellers" />
+      <End Role="requests" EntitySet="requests" />
+    </AssociationSet>
+    <AssociationSet Name="fk_traveller1" Association="Self.fk_traveller1">
+      <End Role="travellers" EntitySet="travellers" />
+      <End Role="subscriptions" EntitySet="subscriptions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_users" Association="Self.fk_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="travellers" EntitySet="travellers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NavetteModelStoreContainer" CdmEntityContainer="NavetteEntities">
+    <EntitySetMapping Name="bank_cards">
+      <EntityTypeMapping TypeName="NavetteModel.bank_cards">
+        <MappingFragment StoreEntitySet="bank_cards">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+          <ScalarProperty Name="account_number" ColumnName="account_number" />
+          <ScalarProperty Name="last_digits" ColumnName="last_digits" />
+          <ScalarProperty Name="account_owner" ColumnName="account_owner" />
+          <ScalarProperty Name="expiration_date" ColumnName="expiration_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lines">
+      <EntityTypeMapping TypeName="NavetteModel.line">
+        <MappingFragment StoreEntitySet="lines">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="departure_time" ColumnName="departure_time" />
+          <ScalarProperty Name="estimated_arrival_time" ColumnName="estimated_arrival_time" />
+          <ScalarProperty Name="departure_location" ColumnName="departure_location" />
+          <ScalarProperty Name="arrival_location" ColumnName="arrival_location" />
+          <ScalarProperty Name="day" ColumnName="day" />
+          <ScalarProperty Name="weekly" ColumnName="weekly" />
+          <ScalarProperty Name="vehicule" ColumnName="vehicule" />
+          <ScalarProperty Name="owner_company" ColumnName="owner_company" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="payment_methods">
+      <EntityTypeMapping TypeName="NavetteModel.payment_methods">
+        <MappingFragment StoreEntitySet="payment_methods">
+          <ScalarProperty Name="traveller_id" ColumnName="traveller_id" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="payment_method_id" ColumnName="payment_method_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="paypal_accounts">
+      <EntityTypeMapping TypeName="NavetteModel.paypal_accounts">
+        <MappingFragment StoreEntitySet="paypal_accounts">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+          <ScalarProperty Name="account_number" ColumnName="account_number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="providers">
+      <EntityTypeMapping TypeName="NavetteModel.provider">
+        <MappingFragment StoreEntitySet="providers">
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="legal_number" ColumnName="legal_number" />
+          <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="requests">
+      <EntityTypeMapping TypeName="NavetteModel.request">
+        <MappingFragment StoreEntitySet="requests">
+          <ScalarProperty Name="request_id" ColumnName="request_id" />
+          <ScalarProperty Name="departure_time" ColumnName="departure_time" />
+          <ScalarProperty Name="estimated_arrival_time" ColumnName="estimated_arrival_time" />
+          <ScalarProperty Name="departure_location" ColumnName="departure_location" />
+          <ScalarProperty Name="arrival_location" ColumnName="arrival_location" />
+          <ScalarProperty Name="day" ColumnName="day" />
+          <ScalarProperty Name="weekly" ColumnName="weekly" />
+          <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subscriptions">
+      <EntityTypeMapping TypeName="NavetteModel.subscription">
+        <MappingFragment StoreEntitySet="subscriptions">
+          <ScalarProperty Name="traveller_id" ColumnName="traveller_id" />
+          <ScalarProperty Name="line_id" ColumnName="line_id" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="reduction" ColumnName="reduction" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="travellers">
+      <EntityTypeMapping TypeName="NavetteModel.traveller">
+        <MappingFragment StoreEntitySet="travellers">
+          <ScalarProperty Name="national_id_number" ColumnName="national_id_number" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="topup" ColumnName="topup" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="NavetteModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="connectionstring" ColumnName="connectionstring" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="approved" ColumnName="approved" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vehicules">
+      <EntityTypeMapping TypeName="NavetteModel.vehicule">
+        <MappingFragment StoreEntitySet="vehicules">
+          <ScalarProperty Name="brand" ColumnName="brand" />
+          <ScalarProperty Name="registration_number" ColumnName="registration_number" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="seats" ColumnName="seats" />
+          <ScalarProperty Name="provider_id" ColumnName="provider_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

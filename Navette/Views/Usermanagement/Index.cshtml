@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Navette.Models.user>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+<link href="~/Content/Style/users.css" rel="stylesheet" />
+
+<h2>Our Users</h2>
+
+@if (Model is null)
+{
+    <h3>
+        @ViewBag.warning
+    </h3>
+}
+else
+{
+    <table id="users">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.user_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.connectionstring)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.approved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.connectionstring)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.approved)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+
+        }
+
+
+    </table>
+}
+
+<p>
+    @Html.ActionLink("Create New User", "UserType", "Usermanagement", new { @class = "btn-create" })
+</p>
