@@ -304,6 +304,8 @@
     <Content Include="Views\Usermanagement\UserType.cshtml" />
     <Content Include="Views\User\CustomRequest.cshtml" />
     <Content Include="Views\Welcome\Welcome_page.cshtml" />
+    <Content Include="Views\Traveller\CustomRequest.cshtml" />
+    <Content Include="Views\Traveller\ViewSubs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

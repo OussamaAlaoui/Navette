@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Navette.Models.line>
 @{
     ViewBag.Title = "ViewLines";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,3 +6,61 @@
 
 <h2>ViewLines</h2>
 
+@if(Model is null)
+{
+    <h3>
+        @ViewBag.no_lines
+    </h3>
+}
+else
+{
+    <table id="lines">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.departure_location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.departure_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.arrival_location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estimated_arrival_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.weekly)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.day)
+            </th>
+        </tr>
+        @foreach( var line in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => line.departure_location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => line.departure_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => line.arrival_location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => line.estimated_arrival_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => line.weekly)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => line.day)
+        </td>
+        <td>
+            @Html.ActionLink("Subscribe","Subscribe", new { /* ??? */ })
+        </td>
+    </tr>
+        }
+
+    </table>
+}

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Navette.Models.subscription>
+@{
+    ViewBag.Title = "ViewSubs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewSubs</h2>
+@if (Model is null)
+{
+    <h3>
+        @ViewBag.no_subs
+    </h3>
+}
+else
+{
+<table id="lines">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reduction)
+        </th>
+    </tr>
+    @foreach (var sub in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => sub.price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => sub.reduction)
+    </td>
+</tr>
+    }
+</table>
