@@ -1,0 +1,57 @@
+﻿body {
+background: url('../Images/back_trans.jpg') no-repeat;
+Background-size:cover;
+padding-bottom:500px;
+
+}
+a{
+    color:white;
+    text-decoration:none;
+}
+.body-content
+{
+    margin:0;
+}
+.Lines {
+    width: inherit;
+    height: 500px;
+    background-color: rgba(0,0,0,.2);
+    backdrop-filter: blur(10px);
+    font-size: 2vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    box-shadow: 0px;
+    overflow-wrap: break-word;
+    
+}
+h3{
+    width:800px;
+}
+.btn a{
+    color: white;
+    background-color: #f06543;
+/*    padding: 0.75rem 1.5rem;
+*/    border-radius: 0.5rem;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 500;
+   
+    cursor: pointer;
+    border: none;
+    display: block;
+}
+
+    .btn:hover {
+        cursor: pointer;
+        background-color: #ff5934;
+    }
+@media (max-width: 1000px) {
+
+    .Lines {
+        font-size: 20px;
+        overflow-wrap: break-word;
+    }
+}

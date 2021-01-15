@@ -1,8 +1,93 @@
-﻿
+﻿@model IEnumerable<Navette.Models.line>
+
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Login_Layout_provider.cshtml";
 }
 
-<h2>Provider Page</h2>
-@ViewBag.m
+<link href="~/Content/Style/Provider_index.css" rel="stylesheet" />
+<h2>Your Lines:</h2>
+
+<div class="Lines">
+
+
+
+
+    @if (Model is null)
+    {
+        <h3 id="empty-mssg">You don't have any lines yet! If you want to add one click on the button below.</h3>
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    Departure time
+                </th>
+                <th>
+                    Estimated arrival time
+                </th>
+                <th>
+                    Departure location
+                </th>
+                <th>
+                    Arrival location
+                </th>
+                <th>
+                    Day
+                </th>
+                <th>
+                    Weekly
+                </th>
+                <th>
+                    Vehicule
+                </th>
+                <th>
+                    Owner company
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.departure_time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estimated_arrival_time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.departure_location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.arrival_location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.day)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.weekly)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vehicule)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.owner_company)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+            }
+        </table>
+
+        
+    }
+
+<p class="btn">
+    @Html.ActionLink("Create New Line", "Create", new { @class = "btn" })
+</p>
+
+</div>

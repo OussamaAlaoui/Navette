@@ -25,6 +25,9 @@ namespace Navette
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                        "~/Content/Style/Layout_style.css"));
+            bundles.Add(new StyleBundle("~/Content/css_provider").Include(
+                      "~/Content/bootstrap.css",
+                       "~/Content/Style/_provider_layout.css"));
         }
     }
 }

@@ -13,24 +13,25 @@
 }
 else
 {
-<table id="lines">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.reduction)
-        </th>
-    </tr>
-    @foreach (var sub in Model)
-    {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => sub.price)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => sub.reduction)
-    </td>
-</tr>
-    }
-</table>
+    <table id="lines">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.reduction)
+            </th>
+        </tr>
+        }
+        @foreach (var sub in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => sub.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => sub.reduction)
+                </td>
+            </tr>
+        }
+    </table>
