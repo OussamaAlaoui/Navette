@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Navette.Models.request>
+
+@{
+    Layout = "~/Views/Shared/_Login_Layout_provider.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Style/Provider_index.css" rel="stylesheet" />
+    <title>Requests</title>
+</head>
+<body>
+    <div class="Lines">
+
+
+        @if (Model is null)
+        {
+        <div class="img-com">
+            <img id="icon" src="~/Content/Images/valide.jpg" />
+            <h3 id="empty-mssg">You don't have any requests yet! </h3>
+        </div>
+        }
+        else
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.request_id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.departure_time)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.estimated_arrival_time)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.departure_location)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.arrival_location)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.day)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.weekly)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.owner_id)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.request_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.departure_time)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.estimated_arrival_time)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.departure_location)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.arrival_location)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.day)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.weekly)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.owner_id)
+                        </td>
+                        <td>
+                          
+                            @Html.ActionLink("Create", "provider") |
+                            @Html.ActionLink("Delete", "Delete")
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+    </div>
+</body>
+</html>

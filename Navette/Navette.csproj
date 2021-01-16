@@ -227,6 +227,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\25-256140_facebook-icon-round-white-png-transparent-png %282%29.png" />
+    <Content Include="Content\Images\valide.jpg" />
     <Content Include="Content\Images\Logo_white.png" />
     <Content Include="Content\Images\driver.svg" />
     <Content Include="Content\Images\facebook.svg" />
@@ -320,6 +321,7 @@
     <Content Include="Views\Provider\Create.cshtml" />
     <Content Include="Views\Vehicule\Create.cshtml" />
     <Content Include="Views\Vehicule\Index.cshtml" />
+    <Content Include="Views\Provider\Requests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

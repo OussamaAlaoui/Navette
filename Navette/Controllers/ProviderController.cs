@@ -33,11 +33,26 @@ namespace Navette.Controllers
 
             return View();
         }
+        public ActionResult Requests()
+        {
+
+            return View();
+        }
 
         // GET: Provider/Create
         public ActionResult Create()
         {
-         
+
+            var r = nv.requests.ToList();
+
+            if (r is null)
+            {
+
+
+                return View();
+            }
+            else
+                return View(r);
             return View();
         }
 

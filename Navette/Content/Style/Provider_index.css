@@ -14,9 +14,12 @@ tr,th,td
     margin:auto;
     padding:10px;
 }
-.body-content
+.img-com
 {
-    margin:0;
+    display:flex;
+}
+.body-content {
+    margin: 0;
 }
 .Lines {
     width: auto;
@@ -35,7 +38,8 @@ tr,th,td
    
 }
 h3{
-    width:800px;
+    width:auto;
+    align-content:center;
 }
 .btn a{
     color: white;
