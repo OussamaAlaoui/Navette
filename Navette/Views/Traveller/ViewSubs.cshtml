@@ -2,19 +2,17 @@
 
 @{
     ViewBag.Title = "ViewSubs";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Traveller_layout.cshtml";
 }
 
 <h2>ViewSubs</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    You are not subcribed to any line. Go back to the main page to fix this or click @Html.ActionLink("Here", "Index") .
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.traveller_id)
-        </th>
+      
         <th>
             @Html.DisplayNameFor(model => model.line_id)
         </th>
@@ -30,9 +28,6 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.traveller_id)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.line_id)
         </td>
         <td>
@@ -42,9 +37,7 @@
             @Html.DisplayFor(modelItem => item.reduction)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Unsubscribe", "Unsubscribe", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }

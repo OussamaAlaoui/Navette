@@ -299,7 +299,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Usermanagement\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Traveller\Index.cshtml" />
     <Content Include="Views\Traveller\ViewLines.cshtml" />
     <Content Include="Views\Usermanagement\CreateUser.cshtml" />
     <Content Include="Views\Usermanagement\Login.cshtml" />
@@ -313,6 +312,8 @@
     <Content Include="Views\Traveller\ViewSubs.cshtml" />
     <Content Include="Views\Shared\_Login_layout_provider.cshtml" />
     <Content Include="Views\Provider\Index.cshtml" />
+    <Content Include="Views\Shared\_Traveller_layout.cshtml" />
+    <Content Include="Views\Traveller\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
