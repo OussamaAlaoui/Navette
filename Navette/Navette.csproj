@@ -172,6 +172,7 @@
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\TravellerController.cs" />
     <Compile Include="Controllers\UsermanagementController.cs" />
+    <Compile Include="Controllers\VehiculeController.cs" />
     <Compile Include="Controllers\WelcomeController.cs" />
     <Compile Include="DataContext\NavetteDBContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,6 +238,8 @@
     <Content Include="Content\Style\bootstrap-theme.min.css" />
     <Content Include="Content\Style\bootstrap.css" />
     <Content Include="Content\Style\bootstrap.min.css" />
+    <Content Include="Content\Style\Create.css" />
+    <Content Include="Content\Style\create_line.css" />
     <Content Include="Content\Style\Index.css" />
     <Content Include="Content\Style\Layout_style.css" />
     <Content Include="Content\Style\Login.css" />
@@ -314,6 +317,9 @@
     <Content Include="Views\Provider\Index.cshtml" />
     <Content Include="Views\Shared\_Traveller_layout.cshtml" />
     <Content Include="Views\Traveller\Index.cshtml" />
+    <Content Include="Views\Provider\Create.cshtml" />
+    <Content Include="Views\Vehicule\Create.cshtml" />
+    <Content Include="Views\Vehicule\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

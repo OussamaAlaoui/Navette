@@ -6,69 +6,61 @@ using System.Web.Mvc;
 using Navette.Models;
 using System.Security.Cryptography;
 using System.Text;
-
 namespace Navette.Controllers
 {
-    public class ProviderController : Controller
+    public class VehiculeController : Controller
     {
         private NavetteEntities nv = new NavetteEntities();
-        // GET: Provider
+        // GET: Vehicule
         public ActionResult Index()
+           
         {
-            var l = nv.lines.ToList();
+            var v = nv.vehicules.ToList();
 
-            if (l is null)
+            if (v is null)
             {
 
-
                 return View();
+
             }
             else
-                return View(l);
+                return View(v);
+
+          
         }
 
-        // GET: Provider/Details/5
+        // GET: Vehicule/Details/5
         public ActionResult Details(int id)
         {
-
             return View();
         }
 
-        // GET: Provider/Create
+        // GET: Vehicule/Create
         public ActionResult Create()
         {
-         
             return View();
         }
 
-        // POST: Provider/Create
+        // POST: Vehicule/Create
         [HttpPost]
-        public ActionResult Create(line l)
+        public ActionResult Create(vehicule v)
         {
+            v.provider_id = Convert.ToInt32(TempData["user_id"].ToString());
+           
 
-            l.owner_company = Convert.ToInt32(TempData["user_id"].ToString());
-           l.departure_time = TimeSpan.Parse(Request.Form["departure_time"]);
-            l.estimated_arrival_time = TimeSpan.Parse(Request.Form["estimated_arrival_time"]);
-            
-            nv.lines.Add(l);
+            nv.vehicules.Add(v);
             nv.SaveChanges();
-            return RedirectToAction("Index", "provider");
-
+            return RedirectToAction("Index","Vehicule");
+           
         }
 
-        public ActionResult logout()
-        {
-            Session["user_id"] = null;
-            Session["user_type"] = null;
-            return RedirectToAction("index", "home");
-        }
-        // GET: Provider/Edit/5
+        // GET: Vehicule/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Provider/Edit/5
+        // POST: Vehicule/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -84,13 +76,13 @@ namespace Navette.Controllers
             }
         }
 
-        // GET: Provider/Delete/5
+        // GET: Vehicule/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Provider/Delete/5
+        // POST: Vehicule/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

@@ -12,25 +12,20 @@ namespace Navette.Controllers
         // GET: Traveller
         public ActionResult Index()
         {
-            using (NavetteEntities nv = new NavetteEntities())
-            {
-                if (Session["user_type"] == null || (!Session["user_type"].Equals("Traveller") && !Session["user_type"].Equals("admin") && !Session["user_type"].Equals("traveller")))
+            string id;
+                if( Session["user_type"]==null || (!Session["user_type"].Equals("Traveller") && !Session["user_type"].Equals("admin") && !Session["user_type"].Equals("traveller")) )
                 {
                     return RedirectToAction("index", "home");
                 }
                 else
                 {
-                    int id = (int)Session["user_id"];
-                    var city = nv.travellers.Find(id);
-                    var lines = nv.lines.Where(m => m.departure_location.ToUpper().Contains(city.city.ToUpper()) || m.arrival_location.ToUpper().Contains(city.city.ToUpper())).ToList();
-                    if (lines is null)
-                    {
-                        ViewBag.no_lines = "No lines available";
-                        return View();
-                    }
-                    return View(lines);
+                    id = Session["user_id"].ToString();
                 }
-            }
+            
+            
+            
+            
+            return View();
         }
         public ActionResult Subscribe(int lineid)
         {
@@ -44,56 +39,33 @@ namespace Navette.Controllers
                 nv.subscriptions.Add(sub);
                 nv.SaveChanges();
             }
-            return View();
+                return View();
         }
         public ActionResult ViewLines()
         {
             using (NavetteEntities nv = new NavetteEntities())
             {
-                if (Session["user_type"] == null || (!Session["user_type"].Equals("Traveller") && !Session["user_type"].Equals("admin") && !Session["user_type"].Equals("traveller")))
+                var lines = nv.lines.ToList();
+                if(lines is null)
                 {
-                    return RedirectToAction("index", "home");
+                    ViewBag.no_lines = "No lines available";
+                    return View();
                 }
-                else
-                {
-                    int id = (int)Session["user_id"];
-                    var city = nv.travellers.Find(id);
-                    var lines = nv.lines.Where(m => m.departure_location.ToUpper().Contains(city.city.ToUpper()) || m.arrival_location.ToUpper().Contains(city.city.ToUpper())).ToList();
-                    if (lines is null)
-                    {
-                        ViewBag.no_lines = "No lines available";
-                        return View();
-                    }
-                    return View(lines);
-                } 
+                return View(lines);
             }
-        }
-        public ActionResult logout()
-        {
-            Session["user_id"] = null;
-            Session["user_type"] = null; 
-            return RedirectToAction("index", "home");
         }
 
         public ActionResult ViewSubs()
         {
-            if (Session["user_type"] == null || (!Session["user_type"].Equals("Traveller") && !Session["user_type"].Equals("admin") && !Session["user_type"].Equals("traveller")))
+            using (NavetteEntities nv = new NavetteEntities())
             {
-                return RedirectToAction("index", "home");
-            }
-            else
-            {
-                using (NavetteEntities nv = new NavetteEntities())
+                var subs = nv.subscriptions.Where(model => model.traveller_id == (int)Session["user_id"] );
+                if (subs is null)
                 {
-                    int user_id = (int)Session["user_id"];
-                    var subs = nv.subscriptions.Where(model => model.traveller_id == user_id).ToList();
-                    if (subs is null)
-                    {
-                        ViewBag.no_lines = "No subscriptions";
-                        return View();
-                    }
-                    return View(subs);
+                    ViewBag.no_lines = "No subscriptions";
+                    return View();
                 }
+                return View(subs);
             }
         }
 

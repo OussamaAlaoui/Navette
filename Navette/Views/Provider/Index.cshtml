@@ -1,16 +1,17 @@
 ﻿@model IEnumerable<Navette.Models.line>
 
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Login_Layout_provider.cshtml";
 }
 
 <link href="~/Content/Style/Provider_index.css" rel="stylesheet" />
-<h2>Your Lines:</h2>
+
 
 <div class="Lines">
 
-
+    <h2>Your Lines:</h2>
 
 
     @if (Model is null)
@@ -36,15 +37,11 @@
                 <th>
                     Day
                 </th>
-                <th>
-                    Weekly
-                </th>
+              
                 <th>
                     Vehicule
                 </th>
-                <th>
-                    Owner company
-                </th>
+             
                 <th></th>
             </tr>
             @foreach (var item in Model)
@@ -65,15 +62,11 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.day)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.weekly)
-                    </td>
+                  
                     <td>
                         @Html.DisplayFor(modelItem => item.vehicule)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.owner_company)
-                    </td>
+                 
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
                         @Html.ActionLink("Details", "Details", new { id = item.id }) |
@@ -83,11 +76,11 @@
             }
         </table>
 
-        
+
     }
 
-<p class="btn">
-    @Html.ActionLink("Create New Line", "Create", new { @class = "btn" })
-</p>
-
+    <p class="btn">
+        @Html.ActionLink("Create New Line", "Create", new { @class = "btn" })
+    </p>
+    
 </div>

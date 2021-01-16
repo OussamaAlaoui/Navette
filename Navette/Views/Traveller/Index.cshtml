@@ -1,74 +1,8 @@
-﻿@model IEnumerable<Navette.Models.line>
+﻿
 @{
-    ViewBag.Title = "ViewLines";
-    Layout = "~/Views/Shared/_Traveller_layout.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ViewLines</h2>
-
-@if (Model is null)
-{
-    <h3>
-        @ViewBag.no_lines
-        Click @Html.ActionLink("Here","CustomRequest") to make a custom request.
-    </h3>
-}
-else
-{
-    <table id="lines">
-        <tr>
-            <th>
-              Departure Location
-            </th>
-            <th>
-                Departure Time
-            </th>
-            <th>
-                Arrival Location
-            </th>
-            <th>
-                Estimated Arrival Time
-            </th>
-            <th>
-                Weekly
-            </th>
-            <th>
-               Day
-            </th>
-        </tr>
-        @foreach (var line in Model)
-        {
-            @Html.BeginForm()
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => line.departure_location)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => line.departure_time)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => line.arrival_location)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => line.estimated_arrival_time)
-                    </td>
-                    <td>@if(line.weekly == true) { 
-                        @Html.Display("Yes")
-                    }else {
-                        @Html.Display("N")
-                    }
-
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => line.day)
-                    </td>
-                    <td>
-                        <input type="submit" value="Subscribe" class="btn btn-default" />
-                    </td>
-                </tr>
-            }
-        }
-
-    </table>
-}
+<h2>Traveller Page</h2>
+@ViewBag.m

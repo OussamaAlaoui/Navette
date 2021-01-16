@@ -1,39 +1,8 @@
-﻿@model Navette.Models.request
+﻿
 @{
     ViewBag.Title = "CustomRequest";
-    Layout = "~/Views/Shared/_Traveller_layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Custom Request</h2>
+<h2>CustomRequest</h2>
 
-@Html.BeginForm()
-{
-
-<div class="input-group">
-    <label>Departure Location</label>
-    @Html.TextBoxFor(model => model.departure_location, "", new { @Class = "form-control" })
-</div>
-<div class="input-group">
-    <label>Arrival Location</label>
-    @Html.TextBoxFor(model => model.arrival_location, "", new { @Class = "form-control" })
-</div>
-<div class="input-group">
-    <label>Departure time</label><input type="time" name="Departure Time" />
-</div>
-<div class="input-group">
-    <label>Estimated Arrival Time</label><input type="time" name="Estimated Arrival Time" />
-</div>
-<div class="input-group">
-    <label>Days</label>
-    @Html.TextBoxFor(model => model.day, "", new { @Class = "form-control" })
-</div>
-<div class="input-group">
-    <input type="radio" name="weekly" id="weekly" value="Weekly" /><label for="weekly">Weekly?</label><br />
-    <input type="radio" name="weekly" id="once" value="Once" /><label for="once">Once?</label><br />
-</div>
-@ViewBag.success
-<div class="col-md-offset-2 col-md-10">
-    <input type="submit" value="CustomRequest" class="btn btn-default" />
-</div>
-
-    }
