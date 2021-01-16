@@ -74,7 +74,7 @@ body {
 }
 .container {
   /* we added this so we will keep everything centered even if the screen size changes */
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 30px;
   flex-grow: 1;
