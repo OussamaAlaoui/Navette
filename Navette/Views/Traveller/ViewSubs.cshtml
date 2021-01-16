@@ -1,37 +1,52 @@
 ﻿@model IEnumerable<Navette.Models.subscription>
+
 @{
     ViewBag.Title = "ViewSubs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>ViewSubs</h2>
-@if (Model is null)
-{
-    <h3>
-        @ViewBag.no_subs
-    </h3>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.traveller_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.line_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reduction)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.traveller_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.line_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.reduction)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
 }
-else
-{
-    <table id="lines">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.reduction)
-            </th>
-        </tr>
-        }
-        @foreach (var sub in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => sub.price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => sub.reduction)
-                </td>
-            </tr>
-        }
-    </table>
+
+</table>

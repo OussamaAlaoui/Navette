@@ -13,18 +13,18 @@ namespace Navette.Controllers
         public ActionResult Index()
         {
             string id;
-                if( Session["user_type"]==null || (!Session["user_type"].Equals("Traveller") && !Session["user_type"].Equals("admin") && !Session["user_type"].Equals("traveller")) )
-                {
-                    return RedirectToAction("index", "home");
-                }
-                else
-                {
-                    id = Session["user_id"].ToString();
-                }
-            
-            
-            
-            
+            if (Session["user_type"] == null || (!Session["user_type"].Equals("Traveller") && !Session["user_type"].Equals("admin") && !Session["user_type"].Equals("traveller")))
+            {
+                return RedirectToAction("index", "home");
+            }
+            else
+            {
+                id = Session["user_id"].ToString();
+            }
+
+
+
+
             return View();
         }
         public ActionResult Subscribe(int lineid)
@@ -39,14 +39,14 @@ namespace Navette.Controllers
                 nv.subscriptions.Add(sub);
                 nv.SaveChanges();
             }
-                return View();
+            return View();
         }
         public ActionResult ViewLines()
         {
             using (NavetteEntities nv = new NavetteEntities())
             {
                 var lines = nv.lines.ToList();
-                if(lines is null)
+                if (lines is null)
                 {
                     ViewBag.no_lines = "No lines available";
                     return View();
@@ -59,7 +59,7 @@ namespace Navette.Controllers
         {
             using (NavetteEntities nv = new NavetteEntities())
             {
-                var subs = nv.subscriptions.Where(model => model.traveller_id == (int)Session["user_id"] );
+                var subs = nv.subscriptions.Where(model => model.traveller_id == (int)Session["user_id"]);
                 if (subs is null)
                 {
                     ViewBag.no_lines = "No subscriptions";
