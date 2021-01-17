@@ -245,6 +245,7 @@
     <Content Include="Content\Style\Layout_style.css" />
     <Content Include="Content\Style\Login.css" />
     <Content Include="Content\Style\Provider_index.css" />
+    <Content Include="Content\Style\TravellerSS.css" />
     <Content Include="Content\Style\users.css" />
     <Content Include="Content\Style\_provider_layout.css" />
     <Content Include="favicon.ico" />

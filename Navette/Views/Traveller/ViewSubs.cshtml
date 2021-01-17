@@ -1,37 +1,55 @@
 ﻿@model IEnumerable<Navette.Models.subscription>
+
 @{
-    ViewBag.Title = "ViewSubs";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Your Subscriptions";
+    Layout = "~/Views/Shared/_Traveller_layout.cshtml";
 }
 
-<h2>ViewSubs</h2>
-@if (Model is null)
-{
-    <h3>
-        @ViewBag.no_subs
-    </h3>
-}
-else
-{
-    <table id="lines">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.reduction)
-            </th>
-        </tr>
-        }
-        @foreach (var sub in Model)
-        {
+<link href="~/Content/Style/Provider_index.css" rel="stylesheet" />
+<div class="Lines">
+    <h2>ViewSubs</h2>
+    @if (Model == null)
+    {
+        <p>
+            You are not subcribed to any line. Go back to the main page to fix this or click @Html.ActionLink("Here", "Index") .
+        </p>
+    }
+    else
+    {
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => sub.price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => sub.reduction)
-                </td>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.line_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.reduction)
+                </th>
+                <th></th>
             </tr>
-        }
-    </table>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.line_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.reduction)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Unsubscribe", "Unsubscribe", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+
+</div>

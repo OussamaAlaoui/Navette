@@ -12,60 +12,88 @@ namespace Navette.Controllers
         // GET: Traveller
         public ActionResult Index()
         {
-            string id;
-                if( Session["user_type"]==null || (!Session["user_type"].Equals("Traveller") && !Session["user_type"].Equals("admin") && !Session["user_type"].Equals("traveller")) )
+            using (NavetteEntities nv = new NavetteEntities())
+            {
+                if (Session["user_type"] == null || (!Session["user_type"].Equals("Traveller") && !Session["user_type"].Equals("admin") && !Session["user_type"].Equals("traveller")))
                 {
                     return RedirectToAction("index", "home");
                 }
                 else
                 {
-                    id = Session["user_id"].ToString();
+                    int id = (int)Session["user_id"];
+                    var city = nv.travellers.Find(id);
+                    var lines = nv.lines.Where(m => m.departure_location.ToUpper().Contains(city.city.ToUpper()) || m.arrival_location.ToUpper().Contains(city.city.ToUpper())).ToList();
+                    if (lines is null)
+                    {
+                        ViewBag.no_lines = "No lines available";
+                        return View();
+                    }
+                    return View(lines);
                 }
-            
-            
-            
-            
-            return View();
+            }
         }
-        public ActionResult Subscribe(int lineid)
+        public ActionResult Subscribe(int id)
         {
             var sub = new subscription();
-            sub.traveller_id = (int)Session["user_id"];
-            sub.line_id = lineid;
-            sub.price = 20;
-            sub.reduction = 0;
-            using (NavetteEntities nv = new NavetteEntities())
-            {
-                nv.subscriptions.Add(sub);
-                nv.SaveChanges();
-            }
-                return View();
+           sub.traveller_id = (int)Session["user_id"];
+           sub.line_id = id;
+           sub.price = 20;
+           sub.reduction = 0;
+           using (NavetteEntities nv = new NavetteEntities())
+           {
+             nv.subscriptions.Add(sub);
+               nv.SaveChanges();
+          }
+            return RedirectToAction("Index","Traveller");
         }
         public ActionResult ViewLines()
         {
             using (NavetteEntities nv = new NavetteEntities())
             {
-                var lines = nv.lines.ToList();
-                if(lines is null)
+                if (Session["user_type"] == null || (!Session["user_type"].Equals("Traveller") && !Session["user_type"].Equals("admin") && !Session["user_type"].Equals("traveller")))
                 {
-                    ViewBag.no_lines = "No lines available";
-                    return View();
+                    return RedirectToAction("index", "home");
                 }
-                return View(lines);
+                else
+                {
+                    int id = (int)Session["user_id"];
+                    var city = nv.travellers.Find(id);
+                    var lines = nv.lines.Where(m => m.departure_location.ToUpper().Contains(city.city.ToUpper()) || m.arrival_location.ToUpper().Contains(city.city.ToUpper())).ToList();
+                    if (lines is null)
+                    {
+                        ViewBag.no_lines = "No lines available";
+                        return View();
+                    }
+                    return View(lines);
+                }
             }
+        }
+        public ActionResult logout()
+        {
+            Session["user_id"] = null;
+            Session["user_type"] = null;
+            return RedirectToAction("index", "home");
         }
 
         public ActionResult ViewSubs()
         {
-            using (NavetteEntities nv = new NavetteEntities())
+            if (Session["user_type"] == null || (!Session["user_type"].Equals("Traveller") && !Session["user_type"].Equals("admin") && !Session["user_type"].Equals("traveller")))
             {
-                var subs = nv.subscriptions.Where(model => model.traveller_id == (int)Session["user_id"] );
-                if (subs is null)
+                return RedirectToAction("index", "home");
+            }
+            else
+            {
+                using (NavetteEntities nv = new NavetteEntities())
                 {
-                    ViewBag.no_lines = "No subscriptions";
-                    return View();
+                    int user_id = (int)Session["user_id"];
+                    var subs = nv.subscriptions.Where(model => model.traveller_id == user_id).ToList();
+                    if (subs is null)
+                    {
+                        ViewBag.no_lines = "No subscriptions";
+                        return View();
+                    }
+                    return View(subs);
                 }
-                return View(subs);
             }
         }
 
