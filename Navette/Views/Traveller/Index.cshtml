@@ -5,13 +5,13 @@
 }
 <link href="~/Content/Style/Provider_index.css" rel="stylesheet" />
 <div class="Lines">
-    @ViewBag.lineid
+ 
     <h2>Your home page</h2>
 
     @if (Model is null)
     {
         <h3>
-            @ViewBag.no_lines
+     
             Click @Html.ActionLink("Here", "CustomRequest") to make a custom request.
         </h3>
     }
@@ -40,7 +40,7 @@
             </tr>
             @foreach (var line in Model)
             {
-                @Html.BeginForm()
+               using (Html.BeginForm()) 
                 {
                     <tr>
                         <td>
@@ -61,7 +61,7 @@
                                 <p>Yes</p>
                             }
                             else
-                            {<p>No</p>
+                   {<p>No</p>
                             }
 
                         </td>
@@ -70,7 +70,7 @@
                         </td>
                         <td>
                             @Html.ActionLink("Subscribe", "Subscribe", new {id=line.id }, null)
-                                 
+
                            @* <input type="submit" id="LineId" value="Subscribe" class="btn btn-default" /> *@
                         </td>
                     </tr>

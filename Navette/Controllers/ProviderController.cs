@@ -21,7 +21,7 @@ namespace Navette.Controllers
             {
 
 
-                return View();
+                return HttpNotFound();
             }
             else
                 return View(l);
@@ -35,25 +35,15 @@ namespace Navette.Controllers
         }
         public ActionResult Requests()
         {
-
-            return View();
+            return View();      
         }
 
         // GET: Provider/Create
         public ActionResult Create()
         {
 
-            var r = nv.requests.ToList();
-
-            if (r is null)
-            {
-
-
-                return View();
-            }
-            else
-                return View(r);
-            return View();
+          return View();
+     
         }
 
         // POST: Provider/Create
@@ -80,45 +70,47 @@ namespace Navette.Controllers
         // GET: Provider/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            line l = nv.lines.Find(id);
+            if (l is null)
+            {
+                return HttpNotFound();
+            }
+            else
+                return View(l);
         }
 
         // POST: Provider/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(line l)
         {
-            try
-            {
-                // TODO: Add update logic here
+            nv.Entry(l).State = System.Data.Entity.EntityState.Modified;
+            nv.SaveChanges();
+            return RedirectToAction("Index", "provider");
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+
+
+
         }
 
         // GET: Provider/Delete/5
+
         public ActionResult Delete(int id)
         {
-            return View();
+
+            line l = nv.lines.SingleOrDefault(x => x.id == id);
+            nv.lines.Remove(l);
+            nv.SaveChanges();
+            return RedirectToAction("Index", "provider");
         }
-
-        // POST: Provider/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Decline(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            request req = nv.requests.SingleOrDefault(x => x.request_id == id);
+            nv.requests.Remove(req);
+            nv.SaveChanges();
+
+
+            return RedirectToAction("Requests","provider");
         }
     }
 }

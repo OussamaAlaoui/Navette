@@ -7,37 +7,46 @@
 <!DOCTYPE html>
 
 
-    <link href="~/Content/Style/Provider_index.css" rel="stylesheet" />
-    <title>Requests</title>
-
+<link href="~/Content/Style/Provider_index.css" rel="stylesheet" />
+<title>Index</title>
+</head>
+<body>
     <div class="Lines">
-
-
-        
+        @if (Model == null)
+        {
+            <div class="img-com">
+                <img id="icon" src="~/Content/Images/valide.jpg" />
+                <h3 id="empty-mssg">You don't have any requests yet! </h3>
+            </div>
+        }
+        else
+        {
             <table class="table">
                 <tr>
                     <th>
-                        Request Id
+                        @Html.DisplayNameFor(model => model.request_id)
                     </th>
                     <th>
-                       Departure Time
+                        @Html.DisplayNameFor(model => model.departure_time)
                     </th>
                     <th>
-                       Estimated Arrival Time
+                        @Html.DisplayNameFor(model => model.estimated_arrival_time)
                     </th>
                     <th>
-                        Departure Location
+                        @Html.DisplayNameFor(model => model.departure_location)
                     </th>
                     <th>
-                        Arrival Location
+                        @Html.DisplayNameFor(model => model.arrival_location)
                     </th>
                     <th>
-                        Day
+                        @Html.DisplayNameFor(model => model.day)
                     </th>
                     <th>
-                        Weekly
+                        @Html.DisplayNameFor(model => model.weekly)
                     </th>
-                  
+                    <th>
+                        @Html.DisplayNameFor(model => model.owner_id)
+                    </th>
                     <th></th>
                 </tr>
 
@@ -63,21 +72,15 @@
                             @Html.DisplayFor(modelItem => item.day)
                         </td>
                         <td>
-                            @if (item.weekly == true)
-                            {
-                                <p>Yes</p>
-                            }
-                            else
-                            {<p>No</p>
-                            }
+                            @Html.DisplayFor(modelItem => item.weekly)
                         </td>
-                   
                         <td>
-                         
-                                @Html.ActionLink("Accept","Create", "provider") 
-                               
-                                    @Html.ActionLink("Decline","Decline", "provider",new { id=item.request_id},null)
-                           
+                            @Html.DisplayFor(modelItem => item.owner_id)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                         </td>
                     </tr>
                 }
@@ -85,3 +88,5 @@
             </table>
         }
     </div>
+    </body>
+</html>

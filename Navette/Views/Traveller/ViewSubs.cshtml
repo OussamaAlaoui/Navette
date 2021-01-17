@@ -33,6 +33,8 @@
 
             @foreach (var item in Model)
             {
+                using (Html.BeginForm())
+                {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.line_id)
@@ -44,9 +46,10 @@
                         @Html.DisplayFor(modelItem => item.reduction)
                     </td>
                     <td>
-                        @Html.ActionLink("Unsubscribe", "Unsubscribe", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Unsubscribe", "Unsubscribe", new { id = item.line_id }, null)
                     </td>
                 </tr>
+                }
             }
 
         </table>

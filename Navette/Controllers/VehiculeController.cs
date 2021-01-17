@@ -46,8 +46,6 @@ namespace Navette.Controllers
         public ActionResult Create(vehicule v)
         {
             v.provider_id = Convert.ToInt32(TempData["user_id"].ToString());
-           
-
             nv.vehicules.Add(v);
             nv.SaveChanges();
             return RedirectToAction("Index","Vehicule");
@@ -55,47 +53,45 @@ namespace Navette.Controllers
         }
 
         // GET: Vehicule/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            vehicule v = nv.vehicules.Find(id);
+            if (v is null)
+            {
+                return HttpNotFound();
+            }
+            else
+                return View(v);
         }
 
         // POST: Vehicule/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(vehicule v)
         {
-            try
-            {
-                // TODO: Add update logic here
+                nv.Entry(v).State = System.Data.Entity.EntityState.Modified;
+                nv.SaveChanges();
+                return RedirectToAction("Index","Vehicule");
+       
+           
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+       
+            
         }
 
-        // GET: Vehicule/Delete/5
-        public ActionResult Delete(int id)
+  
+        public ActionResult Delete(string id)
         {
-            return View();
-        }
 
-        // POST: Vehicule/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            vehicule v = nv.vehicules.SingleOrDefault(x => x.registration_number.Equals(id));
+            if (v is null)
+                return HttpNotFound();
+            else
             {
-                // TODO: Add delete logic here
+            nv.vehicules.Remove(v);
+            nv.SaveChanges();
+            return RedirectToAction("Index", "Vehicule");
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

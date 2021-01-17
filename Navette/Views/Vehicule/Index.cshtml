@@ -49,15 +49,15 @@
                     @Html.DisplayFor(modelItem => item.provider_id)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Edit", "Edit", new {  id=item.registration_number }) 
+                   
+                  @*  @Html.ActionLink("Delete", "Delete", new { id=item.registration_number})*@
                 </td>
             </tr>
         }
 
     </table>
     <p   class="btn">
-        @Html.ActionLink("Add New Vehicule", "Create", new { @class = "btn" })
+        @Html.ActionLink("Add New Vehicule", "Create")
     </p>
 </div>

@@ -4,10 +4,7 @@ Background-size:cover;
 padding-bottom:500px;
 
 }
-a{
-    color:white;
-    text-decoration:none;
-}
+
 tr,th,td
 {
     border:solid white 1px;
@@ -78,6 +75,13 @@ h3{
     border-radius:4px;
     text-align:center;
     padding:20px;
+}
+td a {
+    color: #4ddbff;
+   
+}
+#hide {
+    visibility: hidden !important;
 }
 @media (max-width: 1000px) {
     .Lines {

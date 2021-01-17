@@ -132,3 +132,21 @@ body {
     border: none;
     display: block;
 }
+.Action {
+
+    color: white;
+    background-color: forestgreen;
+    /*    padding: 0.75rem 1.5rem;
+*/ border-radius: 0.5rem;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    display: block;
+}
+
+.Action:hover {
+    cursor: pointer;
+    background-color: #ff5934;
+}

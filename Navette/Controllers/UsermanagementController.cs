@@ -52,16 +52,19 @@ namespace Navette.Controllers
                     string password = string.Join(string.Empty, encryptedpass.Select(x => x.ToString("x2")));
                     var usr = nv.users.Where(n => n.connectionstring == usr2.connectionstring &&
                                          n.password == password).FirstOrDefault();
-                    TempData["username"] = usr.name.ToString();
+                  //  TempData["username"] = usr.name.ToString();
                     if (usr != null)
                     {
                         Session["user_id"] = usr.user_id;
                         Session["user_type"] = usr.type.ToString();
-                       
+                        TempData["user_id"] = usr.user_id.ToString();
                         str = usr.type;
-                      
+                        if (usr.type.Equals("Admin"))
+                            return RedirectToAction("Index","Usermanagement");
+                        else 
                         return RedirectToAction("Index", str);
                     }
+                    
                     else
                     {
                         usr = nv.users.Where(n => n.connectionstring == usr2.connectionstring &&
@@ -70,7 +73,11 @@ namespace Navette.Controllers
                         {
                             Session["user_id"] = usr.user_id;
                             Session["user_type"] = usr.type.ToString();
+                            TempData["user_id"] = usr.user_id.ToString();
                             str = usr.type;
+                            if (usr.type.Equals("Admin"))
+                                return RedirectToAction("Index", "Usermanagement");
+                            else
                             return RedirectToAction("Index", str);
                         }
                         else
@@ -179,39 +186,33 @@ namespace Navette.Controllers
         // GET: Usermanagement/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            user u = nv.users.Find(id);
+            if (u is null)
+            {
+                return HttpNotFound();
+            }
+            else
+                return View(u);
         }
 
         // POST: Usermanagement/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(user u)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            nv.Entry(u).State = System.Data.Entity.EntityState.Modified;
+            nv.SaveChanges();
+            return RedirectToAction("Index", "Usermanagement");
         }
 
-        // GET: Usermanagement/Delete/5
+  
         public ActionResult Delete(int id)
         {
-            nv.users.Remove(nv.users.Find(id));
-            nv.SaveChanges();
-            return View();
-        }
 
-        // POST: Usermanagement/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-           
-            return View();
+
+            user u = nv.users.SingleOrDefault(x => x.user_id == id);
+            nv.users.Remove(u);
+            nv.SaveChanges();
+            return RedirectToAction("Index", "Usermanagement");
 
         }
     }

@@ -25,49 +25,54 @@ else
                 @Html.DisplayNameFor(model => model.name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.connectionstring)
+                @Html.DisplayNameFor(model => model.name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.password)
+                @Html.DisplayNameFor(model => model.connectionstring)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.type)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.approved)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.name)
-            </th>
+
 
         </tr>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.user_id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.connectionstring)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.password)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.approved)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.user_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.connectionstring)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.type)
+        </td>
+        <td>
+            @if (item.approved == true)
+            {
+                <p>Yes</p>
+            }
+            else
+            {<p>No</p>
+            }
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.user_id  }) |
+
+            @Html.ActionLink("Delete", "Delete", new {  id=item.user_id  })
+        </td>
+    </tr>
 
         }
 

@@ -124,5 +124,23 @@ namespace Navette.Controllers
             }
             return View();
         }
+        public ActionResult Unsubscribe(int id)
+        { 
+            using (NavetteEntities nv = new NavetteEntities())   {
+         
+              
+                
+               
+                subscription sub =nv.subscriptions.SingleOrDefault(x => x.line_id == id);
+                nv.subscriptions.Remove(sub);
+                nv.SaveChanges();
+                return RedirectToAction("Index", "Traveller");
+                
+         
+            }
+          
+
+         
+        }
     }
 }
